@@ -1,7 +1,8 @@
 package com.group.libraryapp.service.user
 
-import com.group.libraryapp.domain.user.User
+import com.group.libraryapp.domain.user.JavaUser
 import com.group.libraryapp.domain.user.UserRepository
+import com.group.libraryapp.domain.user.loan_history.User
 import com.group.libraryapp.dto.user.request.UserCreateRequest
 import com.group.libraryapp.dto.user.request.UserUpdateRequest
 import org.assertj.core.api.Assertions.assertThat
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class UserServiceTest @Autowired constructor(
+class JavaUserServiceTest @Autowired constructor(
     private val userRepository: UserRepository,
     private val userService: UserService
 ){
@@ -41,8 +42,8 @@ class UserServiceTest @Autowired constructor(
     fun getUsersTest(){
         //given
         userRepository.saveAll(listOf(
-            User("A",20),
-            User("B",null)
+            User("A", 20),
+            User("B", null)
         ))
 
         //when
@@ -58,8 +59,8 @@ class UserServiceTest @Autowired constructor(
     @Test
     fun updateUserNameTest(){
         //given
-        val saveUser = userRepository.save(User("A",null))
-        val request = UserUpdateRequest(saveUser.id, "B")
+        val saveUser = userRepository.save(User("A", null))
+        val request = UserUpdateRequest(saveUser.id!!, "B")
 
         //when
         userService.updateUserName(request)
@@ -73,7 +74,7 @@ class UserServiceTest @Autowired constructor(
     @Test
     fun deleteUserTest(){
         //given
-        val saveUser = userRepository.save(User("A",null))
+        val saveUser = userRepository.save(User("A", null))
 
         //when
         userService.deleteUser("A")

@@ -2,9 +2,10 @@ package com.group.libraryapp.service.book
 
 import com.group.libraryapp.domain.book.Book
 import com.group.libraryapp.domain.book.BookRepository
-import com.group.libraryapp.domain.user.User
+import com.group.libraryapp.domain.user.JavaUser
 import com.group.libraryapp.domain.user.UserRepository
-import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory
+import com.group.libraryapp.domain.user.loan_history.User
+import com.group.libraryapp.domain.user.loan_history.UserLoanHistory
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository
 import com.group.libraryapp.dto.book.request.BookLoanRequest
 import com.group.libraryapp.dto.book.request.BookRequest
@@ -49,7 +50,7 @@ class BookServiceTest @Autowired constructor(
     fun 책대출정상(){
         //given
         bookRepository.save(Book("a book"))
-        userRepository.save(User("홍길동",10))
+        userRepository.save(User("홍길동", 10))
         val request= BookLoanRequest("홍길동","a book")
 
         //when
@@ -68,9 +69,16 @@ class BookServiceTest @Autowired constructor(
     fun 책대출exception(){
         //given
         bookRepository.save(Book("a book"))
-        val user  = userRepository.save(User("홍길동",10))
+        val user  = userRepository.save(User("홍길동", 10))
 
-        userLoanHistoryRepository.save(UserLoanHistory(user,"a book", false))
+        userLoanHistoryRepository.save(
+            UserLoanHistory(
+                "a book",
+                false,
+                user,
+                null
+            )
+        )
 
         val request= BookLoanRequest("홍길동","a book")
 
@@ -88,8 +96,15 @@ class BookServiceTest @Autowired constructor(
     fun 책반납(){
         //given
         bookRepository.save(Book("a book"))
-        val user  = userRepository.save(User("홍길동",10))
-        userLoanHistoryRepository.save(UserLoanHistory(user,"a book", false))
+        val user  = userRepository.save(User("홍길동", 10))
+        userLoanHistoryRepository.save(
+            UserLoanHistory(
+                "a book",
+                false,
+                user,
+                null
+            )
+        )
         val request = BookReturnRequest("홍길동","a book")
 
         //when
