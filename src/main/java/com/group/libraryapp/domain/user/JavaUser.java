@@ -1,7 +1,6 @@
 package com.group.libraryapp.domain.user;
 
 import com.group.libraryapp.domain.book.Book;
-import com.group.libraryapp.domain.user.loan_history.User;
 import com.group.libraryapp.domain.user.loan_history.UserLoanHistory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

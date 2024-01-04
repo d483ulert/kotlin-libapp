@@ -1,6 +1,7 @@
-package com.group.libraryapp.domain.user.loan_history
+package com.group.libraryapp.domain.user
 
 import com.group.libraryapp.domain.book.Book
+import com.group.libraryapp.domain.user.loan_history.UserLoanHistory
 import javax.persistence.*
 
 @Entity

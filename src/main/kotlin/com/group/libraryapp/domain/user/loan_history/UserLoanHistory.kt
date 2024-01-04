@@ -1,11 +1,7 @@
 package com.group.libraryapp.domain.user.loan_history
 
-import com.group.libraryapp.domain.user.JavaUser
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.ManyToOne
+import com.group.libraryapp.domain.user.User
+import javax.persistence.*
 
 @Entity
 class UserLoanHistory (

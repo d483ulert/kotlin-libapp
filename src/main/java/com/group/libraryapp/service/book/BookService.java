@@ -2,10 +2,9 @@ package com.group.libraryapp.service.book;
 
 import com.group.libraryapp.domain.book.Book;
 import com.group.libraryapp.domain.book.BookRepository;
-import com.group.libraryapp.domain.user.JavaUser;
+import com.group.libraryapp.domain.user.User;
 import com.group.libraryapp.domain.user.UserRepository;
-import com.group.libraryapp.domain.user.loan_history.User;
-import com.group.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository;
+import com.group.libraryapp.domain.user.loan_history.UserLoanHistoryRepository;
 import com.group.libraryapp.dto.book.request.BookLoanRequest;
 import com.group.libraryapp.dto.book.request.BookRequest;
 import com.group.libraryapp.dto.book.request.BookReturnRequest;
@@ -37,18 +36,18 @@ public class BookService {
 
   @Transactional
   public void loanBook(BookLoanRequest request) {
-    Book book = bookRepository.findByName(request.getBookName()).orElseThrow(IllegalArgumentException::new);
+    Book book = bookRepository.findbyName(request.getBookName());
     if (userLoanHistoryRepository.findByBookNameAndIsReturn(request.getBookName(), false) != null) {
       throw new IllegalArgumentException("진작 대출되어 있는 책입니다");
     }
 
-    User user = userRepository.findByName(request.getUserName()).orElseThrow(IllegalArgumentException::new);
+    User user = userRepository.findByName(request.getUserName());
     user.loanBook(book);
   }
 
   @Transactional
   public void returnBook(BookReturnRequest request) {
-    User user = userRepository.findByName(request.getUserName()).orElseThrow(IllegalArgumentException::new);
+    User user = userRepository.findByName(request.getUserName());
     user.returnBook(request.getBookName());
   }
 

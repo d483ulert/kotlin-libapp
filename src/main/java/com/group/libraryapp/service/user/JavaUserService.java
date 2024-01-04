@@ -1,7 +1,7 @@
 package com.group.libraryapp.service.user;
 
+import com.group.libraryapp.domain.user.User;
 import com.group.libraryapp.domain.user.UserRepository;
-import com.group.libraryapp.domain.user.loan_history.User;
 import com.group.libraryapp.dto.user.request.UserCreateRequest;
 import com.group.libraryapp.dto.user.request.UserUpdateRequest;
 import com.group.libraryapp.dto.user.response.UserResponse;
@@ -13,11 +13,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService {
+public class JavaUserService {
 
   private final UserRepository userRepository;
 
-  public UserService(UserRepository userRepository) {
+  public JavaUserService(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
 
@@ -42,7 +42,7 @@ public class UserService {
 
   @Transactional
   public void deleteUser(String name) {
-    User user = userRepository.findByName(name).orElseThrow(IllegalArgumentException::new);
+    User user = userRepository.findByName(name);
     userRepository.delete(user);
   }
 
