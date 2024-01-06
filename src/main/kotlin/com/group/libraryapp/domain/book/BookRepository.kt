@@ -8,5 +8,5 @@ interface BookRepository : JpaRepository<Book,Long> {
     자바
     Optional<Book> findByName(String bookName);
 */
-    fun findbyName(bookName: String?) : Book
+    fun findByName(bookName: String?) : Book
 }
