@@ -87,7 +87,7 @@ class BookServiceTest @Autowired constructor(
             bookService.loanBook(request)
         }.message
 
-        assertThat(msg).isEqualTo("진작 대출되어 있는 책입니다")
+        assertThat(msg).isEqualTo("진작 대출되어 있는 책입니다.")
     }
 
 

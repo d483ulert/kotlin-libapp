@@ -9,6 +9,6 @@ interface UserRepository: JpaRepository<User,Long> {
     Optional<User> findByName(String name);
 */
 
-    fun findByName(name: String?) : User
+    fun findByName(name: String) : User?
 
 }
