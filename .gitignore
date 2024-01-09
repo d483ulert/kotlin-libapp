@@ -3,6 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+.gradle
 
 ### STS ###
 .apt_generated
@@ -19,6 +20,8 @@ target/
 *.iws
 *.iml
 *.ipr
+*.lock
+*.bin
 
 ### NetBeans ###
 /nbproject/private/
@@ -32,6 +35,5 @@ build/
 
 ### VS Code ###
 .vscode/
-
 ### private ###
 src/main/resources/application-private-local.properties
