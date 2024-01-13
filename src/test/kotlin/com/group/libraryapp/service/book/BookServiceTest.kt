@@ -33,7 +33,7 @@ class BookServiceTest @Autowired constructor(
     @Test
     fun saveBookTest(){
         //given
-        val requestBook = BookRequest("this is a book")
+        val requestBook = BookRequest("this is a book","Computer")
 
         //when
         bookService.saveBook(requestBook)
@@ -48,7 +48,7 @@ class BookServiceTest @Autowired constructor(
     @Test
     fun 책대출정상(){
         //given
-        bookRepository.save(Book("a book"))
+        bookRepository.save(Book.fixture("a book"))
         userRepository.save(User("홍길동", 10))
         val request= BookLoanRequest("홍길동","a book")
 
@@ -67,7 +67,7 @@ class BookServiceTest @Autowired constructor(
     @Test
     fun 책대출exception(){
         //given
-        bookRepository.save(Book("a book"))
+        bookRepository.save(Book.fixture("a book"))
         val user  = userRepository.save(User("홍길동", 10))
 
         userLoanHistoryRepository.save(
@@ -94,7 +94,7 @@ class BookServiceTest @Autowired constructor(
     @Test
     fun 책반납(){
         //given
-        bookRepository.save(Book("a book"))
+        bookRepository.save(Book.fixture("a book"))
         val user  = userRepository.save(User("홍길동", 10))
         userLoanHistoryRepository.save(
             UserLoanHistory(
