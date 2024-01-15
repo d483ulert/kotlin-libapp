@@ -7,7 +7,7 @@ import javax.persistence.*
 class UserLoanHistory (
 
     val bookName: String,
-    var isReturn: Boolean,
+    var status: UserLoanStatus = UserLoanStatus.LOANED,
 
     @ManyToOne
     val user: User,
@@ -19,6 +19,21 @@ class UserLoanHistory (
 
 ){
     fun doReturn(){
-        this.isReturn=true
+        this.status=UserLoanStatus.RETURN
+    }
+
+    companion object{
+        fun fixture(
+            user: User,
+            bookName: String = "이상한 나라의 엘리스",
+            status: UserLoanStatus = UserLoanStatus.LOANED,
+            id: Long? = null,
+        ): UserLoanHistory{
+            return UserLoanHistory(
+                user = user,
+                bookName = bookName,
+                status = status
+            )
+        }
     }
 }
