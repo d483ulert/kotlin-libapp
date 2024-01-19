@@ -2,8 +2,11 @@ package com.group.libraryapp.service.user
 
 import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
+import com.group.libraryapp.domain.user.loan_history.UserLoanStatus
 import com.group.libraryapp.dto.user.request.UserCreateRequest
 import com.group.libraryapp.dto.user.request.UserUpdateRequest
+import com.group.libraryapp.dto.user.response.BookHistoryResponse
+import com.group.libraryapp.dto.user.response.UserHistoryResponse
 import com.group.libraryapp.dto.user.response.UserResponse
 import com.group.libraryapp.util.fail
 import com.group.libraryapp.util.findByIdOrThrow
@@ -17,26 +20,42 @@ class UserService(
 
 ) {
     @Transactional
-    fun saveUser(request: UserCreateRequest){
+    fun saveUser(request: UserCreateRequest) {
         val newUser = User(request.name, request.age)
         userRepository.save(newUser)
     }
 
     @Transactional(readOnly = true)
-    fun getUsers(): List<UserResponse>{
+    fun getUsers(): List<UserResponse> {
         return userRepository.findAll()
             .map { UserResponse.of(it) }
     }
 
     @Transactional
-    fun updateUserName(request: UserUpdateRequest){
+    fun updateUserName(request: UserUpdateRequest) {
         val user = userRepository.findByIdOrThrow(request.id)
         user.updateName(request.name)
     }
 
     @Transactional
-    fun deleteUser(name: String){
+    fun deleteUser(name: String) {
         val user = userRepository.findByName(name) ?: fail()
         userRepository.delete(user)
     }
+
+    @Transactional(readOnly = true)
+    fun getUserLoanHistories(): List<UserHistoryResponse> {
+       return userRepository.findAll().map { user ->
+            UserHistoryResponse(
+                name = user.name,
+                books = user.userLoanHistories.map {history ->
+                    BookHistoryResponse(
+                        name = history.bookName,
+                        isReturn = history.status == UserLoanStatus.RETURN
+                    )
+                }
+            )
+        }
+    }
+
 }
