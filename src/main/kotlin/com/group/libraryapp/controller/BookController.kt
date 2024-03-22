@@ -1,6 +1,5 @@
 package com.group.libraryapp.controller
 
-import com.group.libraryapp.domain.book.BookRepository
 import com.group.libraryapp.dto.book.request.BookLoanRequest
 import com.group.libraryapp.dto.book.request.BookRequest
 import com.group.libraryapp.dto.book.request.BookReturnRequest
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class BookController (
-    private val bookService: BookService, private val bookRepository: BookRepository,
+    private val bookService: BookService
 ){
 
     @PostMapping("/book")
