@@ -1,10 +1,5 @@
 package com.group.libraryapp.calculator
 
-fun main(){
-    val map = mapOf(1 to "one", 7 to "seven")
-    print(map.keys)
-    print(map.values)
-}
 class Calculator (
       var number: Int
 ) {
