@@ -7,6 +7,4 @@ interface UserRepository: JpaRepository<User,Long>, UserRepositoryCustom {
 
     fun findByName(name: String) : User?
 
-    fun findByAge(age: Int) : User?
-
 }
